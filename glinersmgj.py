@@ -8,7 +8,10 @@ from collections import defaultdict
 # Cache the download of nltk resources
 @st.cache_data
 def download_nltk_resources():
-    nltk.download('punkt')
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')
 
 download_nltk_resources()
 
